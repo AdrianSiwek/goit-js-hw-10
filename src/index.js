@@ -20,7 +20,18 @@ const onFetchCountries = async (event) => {
             Notify.info("Too many matches found. Please enter a more specific name.");
         }
     }
-    }
+}
+    
+
+
+// function createListMarkup(data) {
+//   return data
+//     .map(
+//       ({ name, flags }) =>
+//         `<li><img src="${flags.svg}" alt="${name.common}" width="40" height="30"/>${name.common}</li>`
+//     )
+//     .join('');
+// }
 
 
 inputCountry.addEventListener('input', debounce(onFetchCountries, DEBOUNCE_DELAY));
