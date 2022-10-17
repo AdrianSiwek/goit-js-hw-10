@@ -11,11 +11,17 @@ const DEBOUNCE_DELAY = 300;
 
 const onFetchCountries = async (event) => {
     const countriesResp = await fetchCountries(event.target.value);
-    // console.log(countries.status);
+    const countries = await countriesResp.json();
+    console.log(countries);
     if (countriesResp.status === 404) {
-        Notiflix.warning("Oops, there is no country with that name");
+        Notify.warning("Oops, there is no country with that name");
+    } else if (countriesResp.status === 200) {
+        if (countries.length > 10) {
+            Notify.info("Too many matches found. Please enter a more specific name.");
+        }
     }
-}
+    }
+
 
 inputCountry.addEventListener('input', debounce(onFetchCountries, DEBOUNCE_DELAY));
 
