@@ -5,25 +5,24 @@ import { fetchCountries } from './js/fetchCountries';
 
 const inputCountry = document.querySelector('input#search-box');
 const ulCountry = document.querySelector('.country-list');
-const divCountry = document.querySelector('.country-info');
+// const divCountry = document.querySelector('.country-info');
 
 const DEBOUNCE_DELAY = 300;
 
 
 const createCountryInfo = country => {
+    // console.log(countriesList[0]);
     const li = document.createElement('li');
-    li.innerHTML = `<div class="inormation-container"><img src=${country.flags.svg} /><p class="country-name">${country.name.official}</p><ul><li><p class="country-info">Population: ${country.population}</p></li><li><p class="country-info">Capital city: ${country.capital}</p></li><li><p class="country-info">Languages: ${Object.values(country.languages).join(', ')}</p></li></ul></div>`
-    ulCountry[0].append(li);
+    li.innerHTML = `<div class="full-info-container"><img src=${country.flags.svg} /><span class="country-name">${country.name.official}</span><ul><li><span class="country-info">Population: ${country.population}</span></li><li><span class="country-info">Capital city: ${country.capital}</span></li><li><span class="country-info">Languages: ${Object.values(country.languages).join(', ')}</span></li></ul></div>`
+    ulCountry[0].appendChild(li);
 };
 
-function createInfoMarkup(data) {
-  return data
-    .map(
-      ({ name, flags }) =>
+const createInfoMarkup = (data) => {
+    return data.map(({ name, flags }) =>
         `<a href="http://wikipedia.org/wiki/${name.common}" target="_blank"><li class="list-item" data-name="${name.common}"><img src="${flags.svg}" alt="${name.common}"/>${name.common}</li></a>`
     )
-    .join('');
-}
+        .join('');
+};
 
 const removeCountry = () => {
     while (ulCountry.firstChild) ulCountry.removeChild(ulCountry.firstChild);
@@ -36,13 +35,13 @@ const onFetchCountries = async (event) => {
     if (countriesResp.status === 404) {
         Notify.warning("Oops, there is no country with that name");
     } else if (countriesResp.status === 200) {
-        if (countries && countries.length > 10) {
+        if (countries.length > 10) {
             Notify.info("Too many matches found. Please enter a more specific name.");
-        } else if (countries && countries.length === 1) {
+        } else if (countries.length === 1) {
             removeCountry();
             countries.forEach(country => createCountryInfo(country));
-        } else if (countries && countries.length >= 2 && countries.length <= 10) {
-            ulCountry[0].textContent = createInfoMarkup(countries);
+        } else if (countries.length >= 2 && countries.length <= 10) {
+            ulCountry[0].innerHTML = createInfoMarkup(countries);
         }
     }
     if (event.target.value.trim() === '') {
