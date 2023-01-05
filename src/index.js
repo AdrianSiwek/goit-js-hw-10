@@ -1,20 +1,20 @@
 import './css/styles.css';
 import Notiflix, { Notify } from 'notiflix';
 import debounce from 'lodash.debounce';
-import { fetchCountries } from './js/fetchCountries';
+import { fetchCountries } from './js/fetchCountries.js';
 
-const inputCountry = document.querySelector('input#search-box');
+const inputCountry = document.querySelector('#search-box');
 const ulCountry = document.querySelector('.country-list');
 // const divCountry = document.querySelector('.country-info');
 
 const DEBOUNCE_DELAY = 300;
 
 
-const createCountryInfo = country => {
-    // console.log(countriesList[0]);
-    const liList = document.createElement('li');
+const createCountry = country => {
+    console.log(ulCountry[0]);
+    const li = document.createElement('li');
     li.innerHTML = `<div class="full-info-container"><img src=${country.flags.svg} /><span class="country-name">${country.name.official}</span><ul><li><span class="country-info">Population: ${country.population}</span></li><li><span class="country-info">Capital city: ${country.capital}</span></li><li><span class="country-info">Languages: ${Object.values(country.languages).join(', ')}</span></li></ul></div>`
-    ulCountry[0].appendChild(liList);
+    ulCountry[0].appendChild(li);
 };
 
 const createInfoMarkup = (data) => {
@@ -29,26 +29,7 @@ const removeCountry = () => {
     while (element.firstChild) element.removeChild(element.firstChild);
 }
 
-// const onFetchCountries = async (event) => {
-//     const countriesResp = await fetchCountries(event.target.value.trim());
-//     const countries = await countriesResp.json();
-//     console.log(countries);
-//     if (countriesResp.status === 404) {
-//         Notify.warning("Oops, there is no country with that name");
-//     } else if (countriesResp.status === 200) {
-//         if (countries.length > 10) {
-//             Notify.info("Too many matches found. Please enter a more specific name.");
-//         } else if (countries.length === 1) {
-//             removeCountry();
-//             countries.forEach(country => createCountryInfo(country));
-//         } else if (countries.length >= 2 && countries.length <= 10) {
-//             ulCountry[0].innerHTML = createInfoMarkup(countries);
-//         }
-//     }
-//     if (event.target.value.trim() === '') {
-//         removeCountry();
-//     }
-// }
+
     
 const onFetchCountries = async (event) => {
     let values = event.target.value.trim()
@@ -56,12 +37,12 @@ const onFetchCountries = async (event) => {
         const countriesResp = await fetchCountries(values);
         if(countriesResp.status === 200){
             const countries = await countriesResp.json();
-            if(countries.length > 10) {
+            if(countries && countries.length > 10) {
                 Notify.info("Too many matches found. Please enter a more specific name.");
-            } else if (countries.length === 1) {
+            } else if (countries && countries.length === 1) {
                 removeCountry();
-                countries.forEach(country => createCountryInfo(country));
-            } else if (countries.length >= 2 && countries.length <= 10) {
+                countries.forEach(country => createCountry(country));
+            } else if (countries && countries.length >= 2 && countries.length <= 10) {
                 ulCountry[0].innerHTML = createInfoMarkup(countries);
             }
         } else if (countriesResp.status === 404) {
