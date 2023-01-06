@@ -26,7 +26,7 @@ const removeCountry = () => {
     while (element.firstChild) element.removeChild(element.firstChild);
 }
 
-
+    
 const onFetchCountries = async event => {
     let value = event.target.value.trim();
     if (value !== '') {
@@ -42,36 +42,13 @@ const onFetchCountries = async event => {
                 ulCountry[0].innerHTML = createInfoMarkup(countries);
             }
         } else if (countriesResp.status === 404) {
-            Notiflix.Notify.failure('Oops, there is no country with that name');
+            Notify.warning("Oops, there is no country with that name");
         }
     }
-    if (value === '') { removeCountry() }
+    if(value === '') {
+        removeCountry();
+    }
 }
-
-
-    
-// const onFetchCountries = async (event) => {
-//     let values = event.target.value.trim();
-//     if(values !== '') {
-//         const countriesResp = await fetchCountries(values);
-//         if(countriesResp.status === 200){
-//             const countries = await countriesResp.json();
-//             if(countries && countries.length > 10) {
-//                 Notify.info("Too many matches found. Please enter a more specific name.");
-//             } else if (countries && countries.length === 1) {
-//                 removeCountry();
-//                 countries.forEach(country => createCountry(country));
-//             } else if (countries && countries.length >= 2 && countries.length <= 10) {
-//                 ulCountry[0].innerHTML = createInfoMarkup(countries);
-//             }
-//         } else if (countriesResp.status === 404) {
-//             Notify.warning("Oops, there is no country with that name");
-//         }
-//     }
-//     if(values === '') {
-//         removeCountry();
-//     }
-// }
 
 
 
