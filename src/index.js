@@ -8,9 +8,9 @@ const DEBOUNCE_DELAY = 300;
 const inputCountry = document.getElementById('search-box');
 const ulCountry = document.getElementsByClassName('country-list');
 
-const createCountry = country => {
+const createCountryInfo = country => {
     const li = document.createElement('li');
-    li.innerHTML = `<div class="full-info-container"><img src=${country.flags.svg} /><p class="country-name">${country.name.official}</p><ul><li><p class="country-info">Population: ${country.population}</p></li><li><p class="country-info">Capital city: ${country.capital}</p></li><li><p class="country-info">Languages: ${Object.values(country.languages).join(', ')}</p></li></ul></div>`
+    li.innerHTML = `<img src=${country.flags.svg} /><p class="country-name">${country.name.official}</p><ul><li><p class="country-info">Population: ${country.population}</p></li><li><p class="country-info">Capital city: ${country.capital}</p></li><li><p class="country-info">Languages: ${Object.values(country.languages).join(', ')}</p></li></ul>`
     ulCountry[0].append(li);
 };
 
@@ -37,7 +37,7 @@ const onFetchCountries = async event => {
                 Notiflix.Notify.info('Too many matches found. Please enter a more specific name');
             } else if (countries && countries.length === 1) {
                 removeCountry();
-                countries.forEach(country => createCountry(country));
+                countries.forEach(country => createCountryInfo(country));
             } else if (countries && countries.length >= 2 && countries.length <= 10) {
                 ulCountry[0].innerHTML = createInfoMarkup(countries);
             }
