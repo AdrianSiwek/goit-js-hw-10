@@ -10,7 +10,7 @@ const ulCountry = document.getElementsByClassName('country-list');
 
 const createCountryInfo = country => {
     const li = document.createElement('li');
-    li.innerHTML = `<img src=${country.flags.svg} /><p class="country-name">${country.name.official}</p><ul><li><p class="country-info">Population: ${country.population}</p></li><li><p class="country-info">Capital city: ${country.capital}</p></li><li><p class="country-info">Languages: ${Object.values(country.languages).join(', ')}</p></li></ul>`
+    li.innerHTML = `<img src=${country.flags.svg} /><p class="country-name">${country.name.official}</p><ul><li><p class="country-list">Population: ${country.population}</p></li><li><p class="country-list">Capital city: ${country.capital}</p></li><li><p class="country-list">Languages: ${Object.values(country.languages).join(', ')}</p></li></ul>`
     ulCountry[0].append(li);
 };
 
