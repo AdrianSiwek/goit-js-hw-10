@@ -33,12 +33,12 @@ const onFetchCountries = async event => {
         const countriesResp = await fetchCountries(value);
         if (countriesResp.status === 200) {
             const countries = await countriesResp.json();
-            if (countries && countries.length > 10) {
+            if (countries.length > 10) {
                 Notiflix.Notify.info('Too many matches found. Please enter a more specific name');
-            } else if (countries && countries.length === 1) {
+            } else if (countries.length === 1) {
                 removeCountry();
                 countries.forEach(country => createCountryInfo(country));
-            } else if (countries && countries.length >= 2 && countries.length <= 10) {
+            } else if (countries.length >= 2 && countries.length <= 10) {
                 ulCountry[0].innerHTML = createInfoMarkup(countries);
             }
         } else if (countriesResp.status === 404) {

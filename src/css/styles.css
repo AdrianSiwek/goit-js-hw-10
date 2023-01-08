@@ -13,8 +13,38 @@ body {
 }
 
 #search-box {
+  display:flex;
+  justify-content: center;
   font: inherit;
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
+}
+
+.heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin: 40px;
+}
+
+.instruction{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 180px;
+  height: 100px;
+  margin-bottom: 40px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
