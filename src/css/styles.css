@@ -71,3 +71,8 @@ a{
 .li-item img {
   margin: 0, 15px;
 }
+
+.paragraph{
+  font-size: 1.5rem;
+  padding-left: 15px;
+}

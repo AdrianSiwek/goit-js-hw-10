@@ -16,7 +16,7 @@ const createCountryInfo = country => {
 
 const createInfoMarkup = (data) => {
     return data.map(({ name, flags }) =>
-        `<a href="http://wikipedia.org/wiki/${name.common}" target="_blank"><li class="li-item" data-name="${name.common}"><img src="${flags.svg}" alt="${name.common}"/>${name.common}</li></a>`
+        `<a href="http://wikipedia.org/wiki/${name.common}" target="_blank"><li class="li-item" data-name="${name.common}"><img src="${flags.svg}" alt="${name.common}"/><p class="paragraph">${name.common}</p></li></a>`
     )
         .join('');
 };
