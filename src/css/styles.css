@@ -17,7 +17,7 @@ body {
   justify-content: center;
   font: inherit;
   padding: 16px;
-  max-width: 320px;
+  /* max-width: 320px; */
   margin-bottom: 16px;
   font-size: 2rem;
 }
@@ -75,4 +75,21 @@ a{
 .paragraph{
   font-size: 1.5rem;
   padding-left: 15px;
+}
+
+.country-name{
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  font-size: 3rem;
+  text-align: center;
+  max-width: 500px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+
+.country-list{
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 50px;
 }
