@@ -23,4 +23,12 @@
   background-image: url("../images/logo.png");
   background-size: cover;
   background-position: center;
+}
+
+.link {
+  font-size: 2.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
 }/*# sourceMappingURL=index.css.map */
